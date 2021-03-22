@@ -9,7 +9,15 @@ app.get("/", function (req, res){
 });
 const url = "https://api.openweathermap.org/data/2.5/weather?q=Tucson,usa&appid=86cf260120401131d552cf53ba65537d&units=imperial"
 https.get(url, function(response){
-  console.log(response);
+  // named it "response" to differentiate between the "res" used earlier in the other call back
+
+  console.log(response.statusCode);
+
+  response.on("data", function(data){
+    const weatherData = JSON.parse(data)
+    console.log(weatherData);
+    //JSON.parse(data)
+  })
 });
 
 
